@@ -300,7 +300,7 @@ void redraw_taskbar(void)
 		if (!c->trans && c->name != NULL)
 		{
 #ifdef XFT
-			XftDrawString8(tbxftdraw, &xft_detail, xftfont, button_startx + SPACE, SPACE + xftfont->ascent, (unsigned char *)c->name, strlen(c->name));
+			XftDrawStringUtf8(tbxftdraw, &xft_detail, xftfont, button_startx + SPACE, SPACE + xftfont->ascent, (unsigned char *)c->name, strlen(c->name));
 #else
 			XDrawString(dsply, taskbar, text_gc, button_startx + SPACE, SPACE + font->ascent, c->name, strlen(c->name));
 #endif
@@ -319,7 +319,7 @@ void draw_menubar(void)
 		if (menuitems[i].label && menuitems[i].command)
 		{
 #ifdef XFT
-			XftDrawString8(tbxftdraw, &xft_detail, xftfont, menuitems[i].x + (SPACE * 2), xftfont->ascent + SPACE, (unsigned char *)menuitems[i].label, strlen(menuitems[i].label));
+			XftDrawStringUtf8(tbxftdraw, &xft_detail, xftfont, menuitems[i].x + (SPACE * 2), xftfont->ascent + SPACE, (unsigned char *)menuitems[i].label, strlen(menuitems[i].label));
 #else
 			XDrawString(dsply, taskbar, text_gc, menuitems[i].x + (SPACE * 2), font->ascent + SPACE, menuitems[i].label, strlen(menuitems[i].label));
 #endif
@@ -378,7 +378,7 @@ void draw_menuitem(unsigned int index, unsigned int active)
 		XFillRectangle(dsply, taskbar, menu_gc, menuitems[index].x, 0, menuitems[index].width, BARHEIGHT() - DEF_BORDERWIDTH);
 	}
 #ifdef XFT
-	XftDrawString8(tbxftdraw, &xft_detail, xftfont, menuitems[index].x + (SPACE * 2), xftfont->ascent + SPACE, (unsigned char *)menuitems[index].label, strlen(menuitems[index].label));
+	XftDrawStringUtf8(tbxftdraw, &xft_detail, xftfont, menuitems[index].x + (SPACE * 2), xftfont->ascent + SPACE, (unsigned char *)menuitems[index].label, strlen(menuitems[index].label));
 #else
 	XDrawString(dsply, taskbar, text_gc, menuitems[index].x + (SPACE * 2), font->ascent + SPACE, menuitems[index].label, strlen(menuitems[index].label));
 #endif

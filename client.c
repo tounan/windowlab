@@ -215,7 +215,7 @@ void redraw(Client *c)
 	if (!c->trans && c->name != NULL)
 	{
 #ifdef XFT
-		XftDrawString8(c->xftdraw, &xft_detail, xftfont, SPACE, SPACE + xftfont->ascent, (unsigned char *)c->name, strlen(c->name));
+		XftDrawStringUtf8(c->xftdraw, &xft_detail, xftfont, SPACE, SPACE + xftfont->ascent, (unsigned char *)c->name, strlen(c->name));
 #else
 		XDrawString(dsply, c->frame, text_gc, SPACE, SPACE + font->ascent, c->name, strlen(c->name));
 #endif
