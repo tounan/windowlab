@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <X11/XKBlib.h>
 #include <X11/Xatom.h>
 #include "windowlab.h"
 
@@ -109,7 +110,7 @@ void do_event_loop(void)
 
 static void handle_key_press(XKeyEvent *e)
 {
-	KeySym key = XKeycodeToKeysym(dsply, e->keycode, 0);
+	KeySym key = XkbKeycodeToKeysym(dsply, e->keycode, 0, 0);
 	switch (key)
 	{
 		case KEY_CYCLEPREV:
