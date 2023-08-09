@@ -248,7 +248,7 @@ extern XftColor xft_detail;
 extern GC border_gc, text_gc, active_gc, depressed_gc, inactive_gc, menu_gc, selected_gc, empty_gc;
 extern XColor border_col, text_col, active_col, depressed_col, inactive_col, menu_col, selected_col, empty_col;
 extern Cursor resize_curs;
-extern Atom wm_state, wm_change_state, wm_protos, wm_delete, wm_cmapwins;
+extern Atom wm_state, wm_change_state, wm_protos, wm_delete, wm_cmapwins, _net_wm_name, UTF8_STRING;
 #ifdef MWM_HINTS
 extern Atom mwm_hints;
 #endif
@@ -260,6 +260,7 @@ extern unsigned int numlockmask;
 
 // events.c
 extern void do_event_loop(void);
+extern int fetch_name(Display *, Window, char **);
 
 // client.c
 extern Client *find_client(Window, int);

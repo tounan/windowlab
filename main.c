@@ -34,7 +34,7 @@ XftColor xft_detail;
 GC string_gc, border_gc, text_gc, active_gc, depressed_gc, inactive_gc, menu_gc, selected_gc, empty_gc;
 XColor border_col, text_col, active_col, depressed_col, inactive_col, menu_col, selected_col, empty_col;
 Cursor resize_curs;
-Atom wm_state, wm_change_state, wm_protos, wm_delete, wm_cmapwins;
+Atom wm_state, wm_change_state, wm_protos, wm_delete, wm_cmapwins, _net_wm_name, UTF8_STRING;
 #ifdef MWM_HINTS
 Atom mwm_hints;
 #endif
@@ -155,6 +155,8 @@ static void setup_display(void)
 	wm_protos = XInternAtom(dsply, "WM_PROTOCOLS", False);
 	wm_delete = XInternAtom(dsply, "WM_DELETE_WINDOW", False);
 	wm_cmapwins = XInternAtom(dsply, "WM_COLORMAP_WINDOWS", False);
+	_net_wm_name = XInternAtom(dsply, "_NET_WM_NAME", False);
+	UTF8_STRING = XInternAtom(dsply, "UTF8_STRING", False);
 #ifdef MWM_HINTS
 	mwm_hints = XInternAtom(dsply, _XA_MWM_HINTS, False);
 #endif

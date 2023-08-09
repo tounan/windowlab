@@ -497,21 +497,20 @@ static void handle_property_change(XPropertyEvent *e)
 
 	if (c != NULL)
 	{
-		switch (e->atom)
+		if (e->atom == _net_wm_name || e->atom == XA_WM_NAME)
 		{
-			case XA_WM_NAME:
-				if (c->name)
-				{
-					XFree(c->name);
-					c->name = NULL;
-				}
-				XFetchName(dsply, c->window, &c->name);
-				redraw(c);
-				redraw_taskbar();
-				break;
-			case XA_WM_NORMAL_HINTS:
-				XGetWMNormalHints(dsply, c->window, c->size, &dummy);
-				break;
+			if (c->name)
+			{
+				XFree(c->name);
+				c->name = NULL;
+			}
+			fetch_name(dsply, c->window, &c->name);
+			redraw(c);
+			redraw_taskbar();
+		}
+		else if (e->atom == XA_WM_NORMAL_HINTS)
+		{
+			XGetWMNormalHints(dsply, c->window, c->size, &dummy);
 		}
 	}
 }
@@ -656,4 +655,44 @@ static int interruptible_XNextEvent(XEvent *event)
 			return 1;
 		}
 	}
+}
+
+// https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/src/FetchName.c
+static int fetch_net_wm_name(
+    Display *dpy,
+    Window w,
+    char **name)
+{
+    Atom actual_type;
+    int actual_format;
+    unsigned long nitems;
+    unsigned long leftover;
+    unsigned char *data = NULL;
+    if (XGetWindowProperty(dpy, w, _net_wm_name, 0L, (long)BUFSIZ, False, UTF8_STRING,
+	&actual_type,
+	&actual_format, &nitems, &leftover, &data) != Success) {
+
+        *name = NULL;
+	return (0);
+    }
+    if (/* actual_type == UTF8_STRING && */ actual_format == 8) {
+	/* The data returned by XGetWindowProperty is guaranteed to
+	contain one extra byte that is null terminated to make retrieveing
+	string properties easy. */
+	*name = (char *)data;
+	return(1);
+    }
+    XFree(data);
+    *name = NULL;
+    return(0);
+}
+
+/* read _NET_WM_NAME
+ * then WM_NAME
+ */
+int fetch_name(Display *dpy, Window w, char **name)
+{
+	if (!fetch_net_wm_name(dpy, w, name))
+		return XFetchName(dpy, w, name);
+	else	return(1);
 }

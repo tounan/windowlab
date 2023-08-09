@@ -62,7 +62,7 @@ void make_new_client(Window w)
 	XGrabServer(dsply);
 
 	XGetTransientForHint(dsply, w, &c->trans);
-	XFetchName(dsply, w, &c->name);
+	fetch_name(dsply, w, &c->name);
 	XGetWindowAttributes(dsply, w, &attr);
 
 	c->window = w;
