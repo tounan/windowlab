@@ -351,6 +351,7 @@ Client *get_prev_focused(void)
 	return prev_focused;
 }
 
+#if 0
 void draw_hide_button(Client *c, GC *detail_gc, GC *background_gc)
 {
 	int x, topleft_offset;
@@ -388,9 +389,66 @@ void draw_close_button(Client *c, GC *detail_gc, GC *background_gc)
 
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset, x + topleft_offset + 8, topleft_offset + 7);
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 1, x + topleft_offset + 7, topleft_offset + 7);
-	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset + 1, x + topleft_offset + 7, topleft_offset + 8);
+
 
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset + 7, x + topleft_offset + 7, topleft_offset);
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 7, x + topleft_offset + 7, topleft_offset + 1);
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 8, x + topleft_offset + 8, topleft_offset + 1);
 }
+#else
+
+void draw_hide_button(Client *c, GC *detail_gc, GC *background_gc)
+{
+	int x, topleft_offset;
+	x = c->width - ((BARHEIGHT() - DEF_BORDERWIDTH) * 3);
+	topleft_offset = (BARHEIGHT() / 2) - 10;
+	XFillRectangle(dsply, c->frame, *background_gc, x, 0, BARHEIGHT() - DEF_BORDERWIDTH, BARHEIGHT() - DEF_BORDERWIDTH);
+
+	// north
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 9, topleft_offset + 1, x + topleft_offset + 9, topleft_offset + 6);
+	// north-east
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 12, topleft_offset + 6, x + topleft_offset + 15, topleft_offset + 3);
+	// east
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 12, topleft_offset + 9, x + topleft_offset + 17, topleft_offset + 9);
+	// south-east
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 12, topleft_offset + 12, x + topleft_offset + 15, topleft_offset + 15);
+	// south
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 9, topleft_offset + 12, x + topleft_offset + 9, topleft_offset + 17);
+	// south-west
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 6, topleft_offset + 12, x + topleft_offset + 3, topleft_offset + 15);
+	// west
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 6, topleft_offset + 9, x + topleft_offset + 1, topleft_offset + 9);
+	// north-west
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 6, topleft_offset + 6, x + topleft_offset + 3, topleft_offset + 3);
+}
+
+void draw_toggledepth_button(Client *c, GC *detail_gc, GC *background_gc)
+{
+	int x, topleft_offset;
+	x = c->width - ((BARHEIGHT() - DEF_BORDERWIDTH) * 2);
+	topleft_offset = (BARHEIGHT() / 2) - 10;
+	XFillRectangle(dsply, c->frame, *background_gc, x, 0, BARHEIGHT() - DEF_BORDERWIDTH, BARHEIGHT() - DEF_BORDERWIDTH);
+
+	XDrawRectangle(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset, 12, 12);
+	XDrawRectangle(dsply, c->frame, *detail_gc, x + topleft_offset + 5, topleft_offset + 5, 12, 12);
+}
+
+void draw_close_button(Client *c, GC *detail_gc, GC *background_gc)
+{
+	int x, topleft_offset;
+	x = c->width - (BARHEIGHT() - DEF_BORDERWIDTH);
+	topleft_offset = (BARHEIGHT() / 2) - 10; // grid size is 19, offsets are 18, 17
+	XFillRectangle(dsply, c->frame, *background_gc, x, 0, BARHEIGHT() - DEF_BORDERWIDTH, BARHEIGHT() - DEF_BORDERWIDTH);
+
+	// NW-SE
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset, x + topleft_offset + 18, topleft_offset + 17);
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 1, x + topleft_offset + 17, topleft_offset + 17);
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset + 1, x + topleft_offset + 17, topleft_offset + 18);
+
+	// SW-NE
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset + 17, x + topleft_offset + 17, topleft_offset);
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 17, x + topleft_offset + 17, topleft_offset + 1);
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 18, x + topleft_offset + 18, topleft_offset + 1);
+}
+
+#endif
