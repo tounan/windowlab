@@ -80,11 +80,7 @@ typedef struct PropMwmHints
 // here are the default settings - change to suit your taste
 
 // if you aren't sure about DEF_FONT, change it to "fixed"; almost all X installations will have that available
-#ifdef XFT
-#define DEF_FONT "-bitstream-bitstream vera sans-medium-r-*-*-*-100-*-*-*-*-*-*"
-#else
-#define DEF_FONT "-b&h-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"
-#endif
+#define DEF_FONT "Unifont-12"
 
 // use named colours, #rgb, #rrggbb or #rrrgggbbb format
 #define DEF_BORDER "#000"
@@ -100,7 +96,7 @@ typedef struct PropMwmHints
 
 // change MODIFIER to None to remove the need to hold down a modifier key
 // the Windows key should be Mod4Mask and the Alt key is Mod1Mask
-#define MODIFIER Mod1Mask
+#define MODIFIER Mod4Mask
 
 // keys may be used by other apps, so change them here
 #define KEY_CYCLEPREV XK_Tab
