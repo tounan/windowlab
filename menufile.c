@@ -46,7 +46,7 @@ void get_menuitems(void)
 	}
 	memset(menuitems, 0, MAX_MENUITEMS_SIZE);
 
-	snprintf(menurcpath, sizeof(menurcpath), "%s/.windowlab/windowlab.menurc", getenv("HOME"));
+	snprintf(menurcpath, sizeof(menurcpath), "%s/.windowlab/menurc", getenv("HOME"));
 #ifdef DEBUG
 	printf("trying to open: %s\n", menurcpath);
 #endif
