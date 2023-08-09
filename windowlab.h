@@ -80,7 +80,11 @@ typedef struct PropMwmHints
 // here are the default settings - change to suit your taste
 
 // if you aren't sure about DEF_FONT, change it to "fixed"; almost all X installations will have that available
+#ifdef XFT
 #define DEF_FONT "Unifont-12"
+#else
+#define DEF_FONT "fixed"
+#endif
 
 // use named colours, #rgb, #rrggbb or #rrrgggbbb format
 #define DEF_BORDER "#000"
