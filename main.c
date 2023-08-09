@@ -183,7 +183,7 @@ static void setup_display(void)
 	xft_detail.color.alpha = 0xffff;
 	xft_detail.pixel = text_col.pixel;
 
-	xftfont = XftFontOpenXlfd(dsply, DefaultScreen(dsply), opt_font);
+	xftfont = XftFontOpenName(dsply, DefaultScreen(dsply), opt_font);
 	if (xftfont == NULL)
 	{
 		err("font '%s' not found", opt_font);
