@@ -389,7 +389,7 @@ void draw_close_button(Client *c, GC *detail_gc, GC *background_gc)
 
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset, x + topleft_offset + 8, topleft_offset + 7);
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 1, x + topleft_offset + 7, topleft_offset + 7);
-
+	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset + 1, x + topleft_offset + 7, topleft_offset + 8);
 
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset, topleft_offset + 7, x + topleft_offset + 7, topleft_offset);
 	XDrawLine(dsply, c->frame, *detail_gc, x + topleft_offset + 1, topleft_offset + 7, x + topleft_offset + 7, topleft_offset + 1);
