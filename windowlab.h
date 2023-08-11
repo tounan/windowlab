@@ -94,7 +94,7 @@ typedef struct PropMwmHints
 #define DEF_MENU "#ddd"
 #define DEF_SELECTED "#aad"
 #define DEF_EMPTY "#000"
-#define DEF_BORDERWIDTH 2
+#define DEF_BORDERWIDTH 3
 #define ACTIVE_SHADOW 0x2000 // eg #fff becomes #ddd
 #define SPACE 3
 
